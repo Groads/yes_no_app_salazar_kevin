@@ -1,5 +1,5 @@
 //Identidad atomica: la unidad mas pequeño de un sistema.
-enum FromWho{me, him}
+enum FromWho{me, hers}
 
 class Message {
   final String text;

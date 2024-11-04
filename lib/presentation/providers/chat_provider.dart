@@ -14,10 +14,15 @@ class ChatProvider extends ChangeNotifier{
 
 //Enviar mensaje
 Future<void> sendMessage(String text) async {
+  if (text.isEmpty) {
+    return; // No envía el mensaje si está vacío
+  }
+    
     //El mensaje siempre va a ser "me" porque yo lo envio
     final newMessage= Message(text: text, fromWho: FromWho.me);
     //Agrega un elemento a la lista "messageList"
     messageList.add(newMessage);
+    print("Cantidad de mensajes en la lista: ${messageList.length}");
    //Notifica si algo de provider cambio para que se guarde en el estado
     notifyListeners();
     //Mueve el scroll
@@ -27,6 +32,7 @@ Future<void> sendMessage(String text) async {
 //Mover el scroll al ultimo mensaje
 
 Future<void> moveScrollToBottom() async{
+  if (chatScrollController.hasClients){
   //Un pequeño atraso en la animacion para garantizar que siempre
   // se vera aun cuando se envien mensajes cortos y rapidos
     await Future.delayed(const Duration(seconds: 1));
@@ -38,7 +44,7 @@ Future<void> moveScrollToBottom() async{
       duration: const Duration(microseconds: 300), 
       //"Rebote" al final de la animacion
       curve: Curves.easeOut);
-    
+     }
        }
  
 }

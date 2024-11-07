@@ -7,8 +7,6 @@ class GetYesNoAnswer {
   //Para majera las peticiones de HTTP
   final _dio = Dio();
 
-
-
 //Obtener la respuesta
 Future<Message> getAnswer() async{
   //Almacenar la peticion GETen una variable 

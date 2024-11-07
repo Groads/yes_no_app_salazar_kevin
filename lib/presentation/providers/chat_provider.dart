@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app_salazar_kevin/config/helpers/get_yes_no_answer.dart';
 import 'package:yes_no_app_salazar_kevin/domain/entities/message.dart';
 
 class ChatProvider extends ChangeNotifier{
@@ -12,6 +13,10 @@ class ChatProvider extends ChangeNotifier{
  final ScrollController chatScrollController=ScrollController();
 
 
+//instancia de la clase GetYesNoAnswer
+final getYesNoAnswer = GetYesNoAnswer();
+
+
 //Enviar mensaje
 Future<void> sendMessage(String text) async {
   if (text.isEmpty) {
@@ -23,6 +28,9 @@ Future<void> sendMessage(String text) async {
     //Agrega un elemento a la lista "messageList"
     messageList.add(newMessage);
     print("Cantidad de mensajes en la lista: ${messageList.length}");
+    if(text.endsWith('?')){
+      herReply();
+    }
    //Notifica si algo de provider cambio para que se guarde en el estado
     notifyListeners();
     //Mueve el scroll
@@ -46,7 +54,19 @@ Future<void> moveScrollToBottom() async{
       curve: Curves.easeOut);
      }
        }
+       
+         Future<void> herReply() async {
+           //Obtener el mensaje de la peticion
+           final herMessage= await getYesNoAnswer.getAnswer();
+           //Añadir el mensaje de mi crush
+           messageList.add(herMessage);
+           //Notifica si algo de provider cambio para el estado
+           notifyListeners();
+           //mueve el croll hasta el ultimo mensaje recibido
+           moveScrollToBottom();
+         }
  
 }
 
 
+//¿Cual es el equivalente del future en JavaScript? Promesa

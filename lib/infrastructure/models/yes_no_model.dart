@@ -42,6 +42,9 @@ class YesNoModel {
           //Siempre sera de ella
     fromWho: FromWho.hers,
     //Sera el gif
-    imageUrl: image);
+    imageUrl: image,
+    timestamp: DateTime.now(),
+    isRead: true
+    );
 
 }

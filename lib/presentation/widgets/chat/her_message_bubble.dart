@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:yes_no_app_salazar_kevin/domain/entities/message.dart';
 
 class HerMessageBubble extends StatelessWidget {
@@ -8,6 +9,7 @@ class HerMessageBubble extends StatelessWidget {
    @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+    final timeFormat = DateFormat('HH:mm').format(message.timestamp);
      return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
        children:[
@@ -29,6 +31,10 @@ class HerMessageBubble extends StatelessWidget {
            ),
 
           const SizedBox (height:10),
+          Text(
+          timeFormat,
+          style: TextStyle(fontSize: 12, color: colors.onSurface.withOpacity(0.6)),
+        ), // Muestra la hora de envío debajo del mensaje
        ],
      );
   }

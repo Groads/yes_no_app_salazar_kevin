@@ -14,15 +14,25 @@ import 'package:yes_no_app_salazar_kevin/presentation/widgets/chat/shared/messag
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Padding(
-          padding: EdgeInsets.all(4.0),
-          child: CircleAvatar(
-            backgroundImage: NetworkImage('https://images.crunchbase.com/image/upload/c_thumb,h_256,w_256,f_auto,g_face,z_0.7,q_auto:eco,dpr_1/bjmk3buzj92rirsqn0vy'),
-          ),
-        ),
-        title: const Text('Jakipz❤️') ,
-        centerTitle: false,
+  leading: const Padding(
+    padding: EdgeInsets.all(4.0),
+    child: CircleAvatar(
+      backgroundImage: NetworkImage('https://images.crunchbase.com/image/upload/c_thumb,h_256,w_256,f_auto,g_face,z_0.7,q_auto:eco,dpr_1/bjmk3buzj92rirsqn0vy'),
+    ),
+  ),
+  title: const Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+       Text('Jakipz❤️'),
+       SizedBox(height: 5),
+       Text(
+        'en línea',
+        style: TextStyle(fontSize: 12, color: Colors.green),
       ),
+    ],
+  ),
+  centerTitle: false,
+),
       body: _ChatView() ,
     );
   }
@@ -45,6 +55,7 @@ class _ChatView extends StatelessWidget {
         children: [
             
             Expanded(child: ListView.builder(
+              controller: chatProvider.chatScrollController,
               itemCount: chatProvider.messageList.length,
               itemBuilder:(context, index) {
                 //instancia del message que sabra de quien es el mensaje

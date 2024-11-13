@@ -4,11 +4,23 @@ import 'package:yes_no_app_salazar_kevin/domain/entities/message.dart';
 
 class ChatProvider extends ChangeNotifier{
 
- List<Message> messageList= [
-     Message(text: 'Hola Ader', fromWho: FromWho.me),
-     Message(text: '¿Lloras porque reprobaste topicos?',  fromWho: FromWho.me)
+ List<Message> messageList = [
+  Message(
+    text: 'Hola Ader',
+    fromWho: FromWho.me,
+    timestamp: DateTime.now(),
+    isRead: true, // Asegúrate de añadir esto
+  ),
+  Message(
+    text: '¿Lloras porque reprobaste tópicos?',
+    fromWho: FromWho.me,
+    timestamp: DateTime.now(),
+    isRead: true, // Asegúrate de añadir esto
+  ),
+];
 
- ];
+
+
  //Controlador para manejar la posicion del scroll
  final ScrollController chatScrollController=ScrollController();
 
@@ -24,7 +36,7 @@ Future<void> sendMessage(String text) async {
   }
     
     //El mensaje siempre va a ser "me" porque yo lo envio
-    final newMessage= Message(text: text, fromWho: FromWho.me);
+    final newMessage= Message(text: text, fromWho: FromWho.me,timestamp: DateTime.now(),isRead: true);
     //Agrega un elemento a la lista "messageList"
     messageList.add(newMessage);
     print("Cantidad de mensajes en la lista: ${messageList.length}");
